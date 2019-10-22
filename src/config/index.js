@@ -8,5 +8,8 @@ if (!envFound) {
 }
 
 module.exports = {
-  port: process.env.PORT || 3000
+  port: process.env.PORT || 3000,
+  logs: {
+    level: process.env.LOG_LEVEL || 'silly'
+  }
 }

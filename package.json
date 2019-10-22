@@ -4,9 +4,12 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "chalk": "^2.4.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "helmet": "^3.21.2"
+    "helmet": "^3.21.2",
+    "mongoose": "^5.7.6",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "^6.5.1",
