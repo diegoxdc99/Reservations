@@ -17,6 +17,10 @@ const Flight = new mongoose.Schema(
     flightDate: {
       type: Date,
       required: [true, 'flightDate is necessary']
+    },
+    price: {
+      type: Number,
+      required: [true, 'cost is necessary']
     }
   }
 )

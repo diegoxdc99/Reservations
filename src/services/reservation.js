@@ -5,6 +5,17 @@ const getByUserId = async function ({ userId }) {
   return reservationsFound
 }
 
+const create = async (user, flight) => {
+  const reservationFields = {
+    userId: user._id,
+    flightId: flight._id,
+    cost: flight.price
+  }
+  const newReservation = await reservation.create(reservationFields)
+  return newReservation
+}
+
 module.exports = {
-  getByUserId
+  getByUserId,
+  create
 }

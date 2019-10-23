@@ -5,6 +5,13 @@ const getByUserId = async function ({ userId }) {
   return Reservation.find(query).sort([['createdAt', 'descending']]).exec()
 }
 
+const create = async (reservationFields) => {
+  const reservationRecord = new Reservation(reservationFields)
+  const reservationSaved = await reservationRecord.save()
+  return reservationSaved
+}
+
 module.exports = {
-  getByUserId
+  getByUserId,
+  create
 }

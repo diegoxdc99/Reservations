@@ -7,6 +7,12 @@ const route = express.Router()
 module.exports = (app) => {
   app.use('/reservations', route)
 
-  route.get('/:id', reservations.getuserReservations)
-  route.post('/', userMiddleware.getUserByDocument, userMiddleware.canBook, userMiddleware.haveReservationToday, reservations.create)
+  route.get('/:id', userMiddleware.getUserByDocument, reservations.getuserReservations)
+  route.post('/',
+    userMiddleware.getUserByDocument,
+    userMiddleware.canBook,
+    userMiddleware.haveReservationToday,
+    userMiddleware.getFlightById,
+    reservations.create
+  )
 }

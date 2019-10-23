@@ -5,6 +5,11 @@ const getAll = async function () {
   return flights
 }
 
+const getById = async ({ flightId }) => {
+  return flight.getById({ flightId })
+}
+
 module.exports = {
-  getAll
+  getAll,
+  getById
 }
