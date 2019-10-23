@@ -1,9 +1,10 @@
 const logger = require('../utils/logger')
-// const flights = require('../services/flights')
+const { flightService } = require('../services')
 
-const getFlights = (req, res) => {
+const getFlights = async (req, res) => {
   logger.info('get all flights info')
-  res.json({ flights: [] })
+  const flights = await flightService.getAll()
+  res.json(flights)
 }
 
 const bookFlight = (req, res) => {
