@@ -8,5 +8,4 @@ module.exports = (app) => {
 
   route.route('/')
     .get(flights.getFlights)
-    .post(flights.bookFlight)
 }
