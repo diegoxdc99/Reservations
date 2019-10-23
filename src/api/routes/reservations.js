@@ -8,5 +8,5 @@ module.exports = (app) => {
   app.use('/reservations', route)
 
   route.get('/:id', reservations.getuserReservations)
-  route.post('/', userMiddleware.canBook, reservations.create)
+  route.post('/', userMiddleware.getUserByDocument, userMiddleware.canBook, userMiddleware.haveReservationToday, reservations.create)
 }

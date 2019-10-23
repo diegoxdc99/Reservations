@@ -1,6 +1,6 @@
-// const reservations = require('../services/reservations')
+// const { reservationService } = require('../services')
 
-const getuserReservations = (req, res) => {
+const getuserReservations = async (req, res) => {
   res.json({ reservations: [] })
 }
 

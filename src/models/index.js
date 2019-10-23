@@ -1,7 +1,9 @@
 const User = require('./user')
-const Flight = require('./Flight')
+const Flight = require('./flight')
+const Reservation = require('./reservation')
 
 module.exports = {
   User,
-  Flight
+  Flight,
+  Reservation
 }
