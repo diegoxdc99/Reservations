@@ -1,8 +1,8 @@
 const express = require('express')
 const { port } = require('./config')
+const app = express()
 
 async function startServer () {
-  const app = express()
   await require('./loaders')(app)
   if (!module.parent) {
     app.listen(port, () => {
@@ -12,3 +12,4 @@ async function startServer () {
 }
 
 startServer()
+module.exports = app

@@ -7,7 +7,7 @@ const fixtures = require('./fixtures/flights')
 let sandbox = null
 let server = null
 
-let flightRepo = {}
+const flightRepo = {}
 
 test.beforeEach(async () => {
   sandbox = sinon.createSandbox()
@@ -15,34 +15,47 @@ test.beforeEach(async () => {
   flightRepo.getAll.returns(Promise.resolve(fixtures.all))
 
   flightRepo.getById = sandbox.stub()
+  flightRepo.getById.withArgs(fixtures.single._id).returns(Promise.resolve(fixtures.single))
 
-  const flightService = proxyquire('../src/repository', {
+  const flightRepositoryIndex = proxyquire('../src/repository', {
     './flight': flightRepo
   })
 
-  const flightController = proxyquire('../src/services', {
+  const flightService = proxyquire('../src/services/flight', {
+    '../repository': flightRepositoryIndex
+  })
+
+  const flightServiceIndex = proxyquire('../src/services', {
     './flight': flightService
   })
 
-  const api = proxyquire('../src/api', {
-    './routes/flights': flightController
+  const flightController = proxyquire('../src/controller/flights', {
+    '../services': flightServiceIndex
   })
 
-  const expressLoader = proxyquire('../src/loaders/express', {
-    '../api': api
+  const flightControllerIndex = proxyquire('../src/controller', {
+    './flights': flightController
   })
 
-  const loaders = proxyquire('../src/loaders', {
-    './express': expressLoader
+  const flightRoutes = proxyquire('../src/api/routes/flights', {
+    '../../controller': flightControllerIndex
   })
 
-  const server = proxyquire('../src/app', {
-    './loaders': loaders
+  const flightRoutesIndex = proxyquire('../src/api', {
+    './routes/flights': flightRoutes
   })
-})
 
-test.afterEach(async => {
-  sandbox && sinon.restore()
+  const loaderExpress = proxyquire('../src/loaders/express', {
+    '../api': flightRoutesIndex
+  })
+
+  const loaderIndex = proxyquire('../src/loaders', {
+    './express': loaderExpress
+  })
+
+  server = proxyquire('../src/app', {
+    './loaders': loaderIndex
+  })
 })
 
 test.serial.cb('/flights get all flights', t => {
@@ -51,6 +64,23 @@ test.serial.cb('/flights get all flights', t => {
     .expect(200)
     .end((err, res) => {
       t.falsy(err, 'should not return an error')
+      t.deepEqual(fixtures.all, res.body)
       t.end()
     })
+})
+
+test.serial.cb('/flights database error', t => {
+  flightRepo.getAll.returns(Promise.reject(new Error('Error in database')))
+  request(server)
+    .get('/flights')
+    .expect(500)
+    .end((err, res) => {
+      t.falsy(err, 'should not return an error')
+      t.deepEqual({ error: 'Error in database' }, res.body)
+      t.end()
+    })
+})
+
+test.afterEach(async => {
+  sandbox && sinon.restore()
 })
