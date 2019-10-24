@@ -22,11 +22,15 @@ test.beforeEach(async () => {
   flightRepo.getById.withArgs({ flightId: fixturesFlights.single._id }).returns(Promise.resolve(fixturesFlights.single))
 
   reservationRepo.getByUserId = sandbox.stub()
-  reservationRepo.getByUserId.withArgs(fixturesReservation.single._id).returns(Promise.resolve(fixturesReservation.single))
+  reservationRepo.getByUserId.withArgs({ userId: fixturesUser.single._id }).returns(Promise.resolve(fixturesReservation.all))
+  reservationRepo.getByUserId.withArgs({ userId: fixturesUser.singleWidthDateToday._id }).returns(Promise.resolve(fixturesReservation.allWidthReservationToday))
 
   reservationRepo.create = sandbox.stub()
+  reservationRepo.create.withArgs(fixturesReservation.fields).returns(Promise.resolve(fixturesReservation.single))
 
   userRepo.getUser = sandbox.stub()
+  userRepo.getUser.withArgs({ document: fixturesUser.single.document }).returns(Promise.resolve(fixturesUser.single))
+  userRepo.getUser.withArgs({ document: fixturesUser.singleWidthDateToday.document }).returns(Promise.resolve(fixturesUser.singleWidthDateToday))
 
   const RepositoryIndex = proxyquire('../src/repository', {
     './flight': flightRepo,
@@ -62,11 +66,20 @@ test.beforeEach(async () => {
     './reservations': reservationController
   })
 
+  const middlewareUser = proxyquire('../src/api/middleware/user', {
+    '../../services': serviceIndex
+  })
+
+  const middlewareIndex = proxyquire('../src/api/middleware', {
+    './user': middlewareUser
+  })
+
   const flightRoutes = proxyquire('../src/api/routes/flights', {
     '../../controller': controllerIndex
   })
   const reservationRoutes = proxyquire('../src/api/routes/reservations', {
-    '../../controller': controllerIndex
+    '../../controller': controllerIndex,
+    '../middleware': middlewareIndex
   })
 
   const flightRoutesIndex = proxyquire('../src/api', {
@@ -96,9 +109,56 @@ test.serial.cb('/reservation create a reservation', t => {
     })
     .expect(200)
     .end((err, res) => {
-      console.log('res.body :', res.body);
-      console.log('err :', err);
       t.falsy(err, 'should not return an error')
+      t.deepEqual({
+        flight: fixturesFlights.single,
+        reservation: fixturesReservation.createResponse
+      }, res.body)
+      t.end()
+    })
+})
+
+test.serial.cb('/reservation create a reservation - user not found', t => {
+  request(server)
+    .post('/reservations')
+    .send({
+      document: fixturesUser.documentFalse,
+      flightId: fixturesFlights.single._id
+    })
+    .expect(500)
+    .end((err, res) => {
+      t.falsy(err, 'should not return an error')
+      t.deepEqual({ error: 'user not found' }, res.body)
+      t.end()
+    })
+})
+
+test.serial.cb('/reservation create a reservation - user already has a reservation', t => {
+  request(server)
+    .post('/reservations')
+    .send({
+      document: fixturesUser.singleWidthDateToday.document,
+      flightId: fixturesFlights.single._id
+    })
+    .expect(500)
+    .end((err, res) => {
+      t.falsy(err, 'should not return an error')
+      t.deepEqual({ error: 'the user already has a reservation' }, res.body)
+      t.end()
+    })
+})
+
+test.serial.cb('/reservation create a reservation - flight not found', t => {
+  request(server)
+    .post('/reservations')
+    .send({
+      document: fixturesUser.single.document,
+      flightId: fixturesFlights.flightFalse
+    })
+    .expect(500)
+    .end((err, res) => {
+      t.falsy(err, 'should not return an error')
+      t.deepEqual({ error: 'Flight not found' }, res.body)
       t.end()
     })
 })

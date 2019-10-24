@@ -16,7 +16,10 @@ const single = {
   price: 5000
 }
 
+const flightFalse = '2313123123123124125125'
+
 module.exports = {
   all,
-  single
+  single,
+  flightFalse
 }
