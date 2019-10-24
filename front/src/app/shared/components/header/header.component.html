@@ -8,12 +8,12 @@
                 <button mat-button [matMenuTriggerFor]="reservations">Reservas</button>
 
                 <mat-menu #flights="matMenu">
-                    <a mat-menu-item href="/flights">Ver todos</a>
+                    <a mat-menu-item routerLink="/flight">Ver todos</a>
                 </mat-menu>
 
                 <mat-menu #reservations="matMenu">
-                    <a mat-menu-item href="/reservation/create">Reservar</a>
-                    <a mat-menu-item href="/reservation/consult">Consultar reservas</a>
+                    <a mat-menu-item routerLink="/reservation/create">Reservar</a>
+                    <a mat-menu-item routerLink="/reservation/consult">Consultar reservas</a>
                 </mat-menu>
             </nav>
         </div>
