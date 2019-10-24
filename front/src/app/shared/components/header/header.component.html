@@ -1,1 +1,21 @@
-<p>header works!</p>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <div class="row between-xs middle-xs header-row">
+            <nav>
+                <a mat-button routerLink="/home" routerLinkActive="active">Home</a>
+
+                <button mat-button [matMenuTriggerFor]="flights">Vuelos</button>
+                <button mat-button [matMenuTriggerFor]="reservations">Reservas</button>
+
+                <mat-menu #flights="matMenu">
+                    <a mat-menu-item href="/flights">Ver todos</a>
+                </mat-menu>
+
+                <mat-menu #reservations="matMenu">
+                    <a mat-menu-item href="/reservation/create">Reservar</a>
+                    <a mat-menu-item href="/reservation/consult">Consultar reservas</a>
+                </mat-menu>
+            </nav>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
