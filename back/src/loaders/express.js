@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser')
+const cors = require('cors')
 const helmet = require('helmet')
 const routes = require('../api')
 
@@ -8,6 +9,7 @@ const errorHandler = (err, req, res, next) => {
 
 module.exports = async (app) => {
   app.use(helmet())
+  app.use(cors())
   app.use(bodyParser.json())
 
   app.get('/status', (req, res) => {
