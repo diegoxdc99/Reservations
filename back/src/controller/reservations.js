@@ -4,8 +4,8 @@ const jsonUtil = require('../utils/json')
 
 const getuserReservations = async (req, res, next) => {
   try {
-    const reservations = await reservationService.getByUserId({ userId: req.body.user._id })
-    res.json(reservations.toJSON())
+    const reservations = await reservationService.getConsolidateInfo({ userId: req.body.user._id })
+    res.json(reservations)
   } catch (error) {
     logger.error('Error trying get user reservation:', error)
     next(error)

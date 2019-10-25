@@ -5,6 +5,11 @@ const getByUserId = async function ({ userId }) {
   return reservationsFound
 }
 
+const getConsolidateInfo = async function ({ userId }) {
+  const reservationsFound = await reservation.getConsolidateInfo({ userId })
+  return reservationsFound
+}
+
 const create = async (user, flight) => {
   const reservationFields = {
     userId: user._id,
@@ -17,5 +22,6 @@ const create = async (user, flight) => {
 
 module.exports = {
   getByUserId,
-  create
+  create,
+  getConsolidateInfo
 }

@@ -9,8 +9,8 @@ const canBook = async (req, res, next) => {
 }
 
 const getUserByDocument = async (req, res, next) => {
-  logger.info('getting user with document', req.body.document)
-  const user = await userService.getUser({ document: req.body.document })
+  logger.info('getting user with document', req.body.document || req.params.id)
+  const user = await userService.getUser({ document: req.body.document || req.params.id })
   if (!user) return next(new Error('user not found'))
 
   req.body.user = user

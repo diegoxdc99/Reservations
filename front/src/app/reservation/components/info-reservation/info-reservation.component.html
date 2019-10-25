@@ -1,0 +1,27 @@
+<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Consultar reservas</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input  matInput placeholder="Cedula" formControlName="document">
+            <mat-error *ngIf="addressForm.controls['document'].hasError('required')">
+              Cedula es <strong>requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button [disabled]="!addressForm.valid" mat-raised-button color="primary" type="submit">Consultar</button>
+    </mat-card-actions>
+
+    <app-reservations [reservations]="reservations" *ngIf="showData"></app-reservations>
+    <mat-error *ngIf="dataError">
+        Usuario no encontrado
+    </mat-error>
+  </mat-card>
+</form>

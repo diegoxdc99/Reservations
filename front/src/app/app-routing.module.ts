@@ -18,7 +18,7 @@ const routes: Routes = [
         loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
       },
       {
-        path: 'reservations',
+        path: 'reservation',
         loadChildren: () => import('./reservation/reservation.module').then(m => m.ReservationModule)
       },
       {

@@ -2,13 +2,30 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ReservationRoutingModule } from './reservation-routing.module';
+import { InfoReservationComponent } from './components/info-reservation/info-reservation.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ReservationsComponent } from './components/reservations/reservations.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    InfoReservationComponent,
+    ReservationsComponent
+  ],
   imports: [
     CommonModule,
-    ReservationRoutingModule
+    ReservationRoutingModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
+    ReactiveFormsModule
   ]
 })
 export class ReservationModule { }
