@@ -5,7 +5,7 @@ import { InfoReservationComponent } from './components/info-reservation/info-res
 
 const routes: Routes = [
   {
-    path: 'create',
+    path: 'consult',
     component: InfoReservationComponent
   }
 ];

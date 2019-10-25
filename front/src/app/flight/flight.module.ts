@@ -5,6 +5,7 @@ import { FlightRoutingModule } from './flight-routing.module';
 import { FlightsComponent } from './components/flights/flights.component';
 import { MaterialModule } from '../material/material.module';
 import { FlightComponent } from './components/flight/flight.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { FlightComponent } from './components/flight/flight.component';
   imports: [
     CommonModule,
     FlightRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class FlightModule { }

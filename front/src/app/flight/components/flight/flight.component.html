@@ -4,4 +4,9 @@
         <mat-card-subtitle> {{flight.price}} </mat-card-subtitle>
         <mat-card-subtitle> {{flight.flightDate | date}} </mat-card-subtitle>
     </mat-card-header>
+    <mat-card-actions class="center-xs">
+      <div class="row">
+        <button [disabled]="!formValid" mat-button color="primary" class="col-xs-12" (click)="reserveFlight()">Reservar</button>
+      </div>
+    </mat-card-actions>
 </mat-card>

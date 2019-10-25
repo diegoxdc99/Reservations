@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Flight } from 'src/app/models/flight';
 
 @Component({
@@ -8,9 +8,15 @@ import { Flight } from 'src/app/models/flight';
 })
 export class FlightComponent implements OnInit {
   @Input() flight: Flight;
+  @Input() formValid: boolean;
+  @Output() reserveClicked: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+  }
+
+  reserveFlight() {
+    this.reserveClicked.emit(this.flight);
   }
 
 }

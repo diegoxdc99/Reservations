@@ -20,7 +20,7 @@ const Flight = new mongoose.Schema(
     },
     price: {
       type: Number,
-      required: [true, 'cost is necessary']
+      required: [true, 'price is necessary']
     }
   }
 )

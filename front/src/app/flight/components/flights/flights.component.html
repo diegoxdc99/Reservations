@@ -1,3 +1,28 @@
-<div class="flight-grid" >
-    <app-flight *ngFor="let flight of flights" [flight]="flight"></app-flight>
-</div>
+
+
+<form [formGroup]="reservationForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>Vuelos disponibles</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input  matInput placeholder="Cedula" formControlName="document">
+              <mat-error *ngIf="reservationForm.controls['document'].hasError('required')">
+                Cedula es <strong>requerida</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-error *ngIf="dataError">
+          {{textError}}
+      </mat-error>
+
+      <div class="flight-grid" >
+          <app-flight *ngFor="let flight of flights" [formValid]="reservationForm.valid" [flight]="flight" (reserveClicked)="makeReservation($event)"></app-flight>
+      </div>
+    </mat-card>
+  </form>
