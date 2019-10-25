@@ -42,5 +42,11 @@
   "bugs": {
     "url": "https://github.com/diegoxdc99/Reservations/issues"
   },
-  "homepage": "https://github.com/diegoxdc99/Reservations#readme"
+  "homepage": "https://github.com/diegoxdc99/Reservations#readme",
+  "ava": {
+    "files": [
+      "test/**/*",
+      "!test/fixtures"
+    ]
+  }
 }
