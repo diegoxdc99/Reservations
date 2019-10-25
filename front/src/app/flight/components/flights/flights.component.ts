@@ -17,7 +17,6 @@ export class FlightsComponent implements OnInit {
   ngOnInit() {
     this.flightsService.getAllFlights()
     .subscribe(flights => {
-      console.log(flights);
       this.flights = flights;
     });
   }

@@ -13,7 +13,6 @@ export class ReservationService {
   ) { }
 
   getAllFlights(document: string) {
-    console.log('document :', document);
     return this.http.get<Reservation[]>(`${environment.serverUrl}/reservations/${document}`);
   }
 }

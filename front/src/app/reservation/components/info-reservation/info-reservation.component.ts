@@ -23,6 +23,7 @@ export class InfoReservationComponent {
 
   onSubmit() {
     this.dataError = false;
+    this.showData = false;
     this.reservationService.getAllFlights(this.addressForm.get('document').value)
     .subscribe(reservations => {
       this.showData = true;
