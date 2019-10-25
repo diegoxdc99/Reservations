@@ -19,6 +19,7 @@ export class FlightsComponent implements OnInit {
   flights: Flight[];
 
   dataError = false;
+  dataSuccess = false;
   textError: string;
 
   reservationForm = this.fb.group({
@@ -39,9 +40,10 @@ export class FlightsComponent implements OnInit {
 
   makeReservation(flight) {
     this.dataError = false;
+    this.dataSuccess = false;
     this.reservationService.createReservation(flight, this.reservationForm.get('document').value)
     .subscribe(reservation => {
-      alert('realizada');
+      this.dataSuccess = true;
     },
     ({ error }) => {
       this.dataError = true;

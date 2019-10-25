@@ -20,6 +20,9 @@
       <mat-error *ngIf="dataError">
           {{textError}}
       </mat-error>
+      <div class="success" *ngIf="dataSuccess">
+          Realizado correctamente
+      </div>
 
       <div class="flight-grid" >
           <app-flight *ngFor="let flight of flights" [formValid]="reservationForm.valid" [flight]="flight" (reserveClicked)="makeReservation($event)"></app-flight>
