@@ -48,12 +48,18 @@ Ejecutar el siguiente comando:
 
 `npm test`
 
+[![Pruebas de integración](https://raw.githubusercontent.com/diegoxdc99/Reservations/front/Integration-test.PNG?token=ADHOHPUBQJJG5HPPH474JGS5WPA6E "Pruebas de integración")](https://raw.githubusercontent.com/diegoxdc99/Reservations/front/Integration-test.PNG "Pruebas de integración")
+
 ## Covertura
 Para conocer la covertura de las pruebas de integración ejecutamos el siguiente comando
 
 `npm run coverage`
 
+[![Covertura](https://raw.githubusercontent.com/diegoxdc99/Reservations/front/coverage.PNG?token=ADHOHPSOGTBYSAQM66RCPWS5WPBFO "Covertura")](https://raw.githubusercontent.com/diegoxdc99/Reservations/front/coverage.PNG"Covertura")
+
 ## Formato HTML
 Para conocer el reporte de covertura en un formato HTML se puede ejecutar el siguiente codigo que generará una carpeta con la pagina web
 
 `npm run coverageHTML`
+
+[![Covertura HTML](https://raw.githubusercontent.com/diegoxdc99/Reservations/front/CoverageHTML.png?token=ADHOHPQZBYBYEEESGMTQMKS5WPBIC "Covertura HTML")](https://raw.githubusercontent.com/diegoxdc99/Reservations/front/CoverageHTML.png "Covertura HTML")
