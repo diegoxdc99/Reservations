@@ -24,5 +24,9 @@
     <mat-error *ngIf="dataError">
         Usuario no encontrado
     </mat-error>
+    <mat-error *ngIf="showData && reservations && reservations.length === 0">
+      El usuario no tiene reservas
+  </mat-error>
+
   </mat-card>
 </form>
